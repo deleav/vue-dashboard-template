@@ -1,0 +1,92 @@
+# iot-couchdb:
+#   restart: always
+#   image: couchdb
+#   container_name: iot-couchdb
+#   volumes:
+#     - ${PWD}/data/couchdb:/usr/local/var/lib/couchdb
+#   environment:
+#     - COUCHDB_USER=admin
+#     - COUCHDB_PASSWORD=1234qwer
+#   ports:
+#     - "5984:5984"
+
+# iot-server:
+#   restart: always
+#   image: linkeriot/iot-server
+#   container_name: iot-server
+#   environment:
+#     - REPOSITORY=https://hub.linkerdcos.io
+#     - SECRET=linkeriot@linkernetworks
+#     - WEB_NONCE=linkeriot@forportal
+#     - WEB_SECRET=3a8ef67d5ad4fb0ab4ef382006d337470c7fb53b0c434742b93fddb92e0dab54
+#   links:
+#     - iot-couchdb:iot-couchdb
+#     - iot-redis:iot-redis
+#   ports:
+#     - "3000:3000"
+
+# iot-redis:
+#   restart: always
+#   image: redis
+#   container_name: iot-redis
+#   ports:
+#     - "6379:6379"
+
+# iot-build-controller:
+#   restart: always
+#   image: linkeriot/iot-server
+#   container_name: iot-build-controller
+#   links:
+#     - iot-couchdb:iot-couchdb
+#   ports:
+#     - "3330:3330"
+#   command: [node, build-controller]
+
+portal:
+  restart: always
+  image: linkeriot/portal
+  container_name: portal
+  volumes:
+    - ${PWD}/../iot-portal/app:/app
+  environment:
+    - LINKER_IOT_SERVER=http://104.199.252.165:3000
+    # - LINKER_IOT_SERVER=http://iot-server:3000
+    - DB_SERVER=iot-mongodb
+    - DB_PORT=27017
+  links:
+    # - iot-server:iot-server
+    - iot-mongodb:iot-mongodb
+  ports:
+    - "6688:6688"
+  extra_hosts:
+    - "iot-server:104.199.252.165"
+
+iot-mongodb:
+  restart: always
+  image: mongo
+  container_name: iot-mongodb
+  ports:
+    - "27017:27017"
+    - "28017:28017"
+
+iot-nginx:
+  restart: always
+  image: nginx
+  container_name: nginx
+  volumes:
+    - ${PWD}/nginx.default.config:/etc/nginx/conf.d/default.conf
+  links:
+    - portal:portal
+    - view:view
+  ports:
+    - "80:80"
+
+view:
+  restart: always
+  image: linkeriot/view
+  container_name: view
+  volumes:
+    - ${PWD}:/app
+  ports:
+    - "8080:8080"
+  command: ["npm", "run", "dev"]

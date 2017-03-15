@@ -7,12 +7,18 @@ Need https://bitbucket.org/linkernetworks/iot-portal in the same folder.
 
 ``` bash
 docker build -t linkeriot/view .
+```
 
+## Run
+``` bash
 docker-compose up
 
 # rm container
 docker rm -f $(docker ps -a -q)
 ```
+
+## View
+http://localhost/view
 
 ## Config
 ``` yaml

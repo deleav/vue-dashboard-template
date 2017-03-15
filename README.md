@@ -3,11 +3,19 @@
 > An IoT portal with vue
 
 ## Build Setup
+Need https://bitbucket.org/linkernetworks/iot-portal in the same folder.
+
 ``` bash
 docker build -t linkeriot/view .
+
+docker-compose up
+
+# rm container
+docker rm -f $(docker ps -a -q)
 ```
 
-``` config
+``` yaml
+# docker-compose.yaml
 # use extra hosts
 portal:
   restart: always

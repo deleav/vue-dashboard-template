@@ -1,50 +1,23 @@
-<template>
-  <div class="container">
-    <div class="col-md-3">
-      Hello {{ msg }}
-      {{ email }}
-      {{ password }}
-    </div>
-    <input type="email" :value='email' @input='updateEmail({value: $event.target.value})' />
-    <input type="password" :value='password' @input='updatePassword({value: $event.target.value})' />
-    <!--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active">
-          <img class="d-block img-fluid" src="../assets/logo.png" alt="First slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block img-fluid" src="../assets/logo.png" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block img-fluid" src="../assets/logo.png" alt="Third slide">
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>-->
-  </div>
+<template lang="jade">
+  .row.h-100
+    .container.my-auto
+      .card.mx-auto(style='max-width: 688px; height: 400px;')
+        .container.my-auto
+          label.col-md-2.my-auto(for='email') Email:
+          input#email.col-md-4(type='email', :value='email', @input='updateEmail({value: $event.target.value})')
+          .w-100.mb-1
+          label.col-md-2.my-auto(for='password') Password:
+          input#password.col-md-4(type='password', :value='password', @input='updatePassword({value: $event.target.value})')
+          .w-100.mb-1
+          button.col-md-2.offset-md-4.btn.btn-outline-secondary(@click="login") Submit
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex';
   import store from '@/store';
-  import * as types from '@/store/modules/login/types';
-
 
   export default {
     store,
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-        types,
-      };
-    },
     computed: {
       ...mapState('login', [
         'email',
@@ -55,19 +28,31 @@
       ...mapMutations('login', [
         'updateEmail',
         'updatePassword'
-      ])
+      ]),
+      login() {
+        fetch('/user/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password
+          })
+        }).then(function(response) {
+          console.log(response.status)     //=> number 100–599
+          console.log(response.statusText) //=> String
+          console.log(response.headers)    //=> Headers
+          console.log(response.url)        //=> String
+
+          return response.text()
+        }, function(error) {
+          error.message //=> String
+        })
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-#carouselExampleControls {
-  & > div {
-    background: gray;
-  }
-
-  & > a {
-
-  }
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 </style>

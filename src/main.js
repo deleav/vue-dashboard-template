@@ -8,7 +8,8 @@ import router from './router';
 import '@/assets/vendor/bootstrap-4.0.0/dist/css/bootstrap.css';
 // third party add script
 import '@/assets/vendor/bootstrap-4.0.0/dist/js/bootstrap';
-// import '@/assets/vendor/bootstrap.native/dist/bootstrap-native';
+// global scss
+import '@/assets/index.scss';
 
 Vue.config.productionTip = false;
 

@@ -5,4 +5,4 @@ WORKDIR /app
 
 EXPOSE 8080
 
-CMD ["./myscript.sh"]
+CMD ["npm", "install"]

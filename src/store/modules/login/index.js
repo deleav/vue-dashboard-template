@@ -3,7 +3,7 @@ import * as types from './types';
 export default {
   namespaced: true,
   state: {
-    email: 'sunny573@gmail.com',
+    email: 'sunny4817@gmail.com',
     password: '1234qwer'
   },
   mutations: {

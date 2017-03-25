@@ -9,12 +9,13 @@
           label.col-md-2.my-auto(for='password') Password:
           input#password.col-md-4(type='password', :value='password', @input='updatePassword({value: $event.target.value})')
           .w-100.mb-1
-          button.col-md-2.offset-md-4.btn.btn-outline-secondary(@click="login") Submit
+          button.col-md-2.offset-md-4.btn.btn-outline-secondary(@click="login") Login
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex';
   import store from '@/store';
+  import loginApi from '@/api/login';
 
   export default {
     store,
@@ -30,22 +31,18 @@
         'updatePassword'
       ]),
       login() {
-        fetch('/user/login', {
-          method: 'POST',
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password
-          })
-        }).then(function(response) {
-          console.log(response.status)     //=> number 100–599
-          console.log(response.statusText) //=> String
-          console.log(response.headers)    //=> Headers
-          console.log(response.url)        //=> String
-
-          return response.text()
-        }, function(error) {
-          error.message //=> String
-        })
+        console.log({
+          email: this.email,
+          password: this.password
+        });
+        loginApi.login({
+          email: this.email,
+          password: this.password
+        }).then(function( value ) {
+          console.log( JSON.parse( value ) );
+          let expireDate = new Date();
+          expireDate.setDate(expireDate.getDate() + 2);
+        });
       }
     }
   };

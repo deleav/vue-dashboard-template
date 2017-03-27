@@ -3,6 +3,8 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import VueCookie from 'vue-cookie';
+Vue.use(VueCookie);
 
 // third party add css style
 import '@/assets/vendor/bootstrap-4.0.0/dist/css/bootstrap.css';

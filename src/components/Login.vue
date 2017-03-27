@@ -16,6 +16,7 @@
   import { mapState, mapMutations } from 'vuex';
   import store from '@/store';
   import loginApi from '@/api/login';
+  import responseApi from '@/api/response';
 
   export default {
     store,
@@ -28,21 +29,34 @@
     methods: {
       ...mapMutations('login', [
         'updateEmail',
-        'updatePassword'
+        'updatePassword',
+        'updateToken'
       ]),
       login() {
-        console.log({
+        let user = {
           email: this.email,
           password: this.password
-        });
-        loginApi.login({
-          email: this.email,
-          password: this.password
-        }).then(function( value ) {
-          console.log( JSON.parse( value ) );
-          let expireDate = new Date();
-          expireDate.setDate(expireDate.getDate() + 2);
-        });
+        };
+        loginApi.login( user ).then(res => {
+          if ( res.code === 200 ) {
+            user.username = res.userinfo.username;
+            let expireDate = new Date();
+            expireDate.setDate(expireDate.getDate() + 2);
+            loginApi.uLogin( user ).then(res => {
+              console.log(res);
+              if ( res.token )
+                this.updateToken({ value: res.token });
+              this.$cookie.set('email', user.email, { expires: expireDate });
+              this.$router.push('/');
+            }, error => responseApi.errorResponse( error ));
+          } else {
+            let error = {
+              msg: res.msg,
+              code: res.code
+            };
+            responseApi.errorResponse( error );
+          }
+        }, error => responseApi.errorResponse( error ));
       }
     }
   };

@@ -35,7 +35,8 @@ module.exports = merge(baseWebpackConfig, {
       jQuery: 'jquery',
       Tether: 'tether',
       Promise: 'es6-promise',
-      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      _: 'lodash'
     })
   ]
 })

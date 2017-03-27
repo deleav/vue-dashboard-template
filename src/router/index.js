@@ -5,6 +5,7 @@ import Router from 'vue-router';
 // single async components
 const Hello = () => import('@/components/Hello');
 const Login = () => import('@/components/Login');
+const SignIn = () => import('@/components/SignIn');
 
 // const Hello = resolve => require(['@/components/Hello'], resolve)
 // const Login = resolve => require(['@/components/Login'], resolve)
@@ -25,6 +26,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
-    },
+    }, {
+      path: '/signin',
+      name: 'SignIn',
+      component: SignIn
+    }
   ],
 });

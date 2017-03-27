@@ -4,15 +4,17 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import VueCookie from 'vue-cookie';
-Vue.use(VueCookie);
-
 // third party add css style
 import '@/assets/vendor/bootstrap-4.0.0/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 // third party add script
-import '@/assets/vendor/bootstrap-4.0.0/dist/js/bootstrap';
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
+// import '@/assets/vendor/bootstrap-4.0.0/dist/js/bootstrap';
 // global scss
 import '@/assets/index.scss';
 
+Vue.use(VueCookie);
+Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

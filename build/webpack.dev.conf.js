@@ -32,8 +32,6 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrorsPlugin(),
     new webpack.ProvidePlugin({
-      jQuery: 'jquery',
-      Tether: 'tether',
       Promise: 'es6-promise',
       fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
       _: 'lodash'

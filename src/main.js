@@ -8,8 +8,9 @@ import VueCookie from 'vue-cookie';
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 // third party add css style
 // edit the file to change main style
-import '@/assets/vendor/bootstrap-4.0.0/dist/css/bootstrap.css';
+import '@/assets/vendor/bootstrap-4.0.0/scss/bootstrap.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'font-awesome/scss/font-awesome.scss';
 // import '@/assets/vendor/bootstrap-4.0.0/dist/js/bootstrap';
 // global scss
 import '@/assets/index.scss';

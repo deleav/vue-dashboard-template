@@ -1,6 +1,6 @@
 <template lang="jade">
-  .row.h-100
-    .container.my-auto
+  .container-fluid.h-100
+    .row.align-items-center.h-100
       .card.mx-auto(style='max-width: 688px; height: 400px;')
         .container.my-auto
           label.col-md-2.my-auto(for='email') Email:

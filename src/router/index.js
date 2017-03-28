@@ -6,6 +6,9 @@ import Router from 'vue-router';
 const Hello = () => import('@/components/Hello');
 const Login = () => import('@/components/Login');
 const SignIn = () => import('@/components/SignIn');
+const Dashboard = () => import('@/components/Dashboard');
+const Home = () => import('@/components/Home');
+const Project = () => import('@/components/Project');
 
 // const Hello = resolve => require(['@/components/Hello'], resolve)
 // const Login = resolve => require(['@/components/Login'], resolve)
@@ -20,8 +23,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello,
+      component: Dashboard,
+      redirect: 'dashboard',
+      children: [
+        {
+          path: 'dashboard',
+          component: Home
+        }, {
+          path: 'project',
+          component: Project
+        }
+      ]
     }, {
       path: '/login',
       name: 'Login',

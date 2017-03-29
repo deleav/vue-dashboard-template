@@ -1,5 +1,5 @@
 <template lang="jade">
-  .container-fluid.h-100
+  #login.h-100
     .row.align-items-center.h-100
       .card.mx-auto(style='max-width: 688px; height: 400px;')
         .container.my-auto
@@ -14,20 +14,18 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-  import store from '@/store';
   import loginApi from '@/api/login';
   import responseApi from '@/api/response';
 
   export default {
-    store,
     computed: {
-      ...mapState('login', [
+      ...mapState('user', [
         'email',
         'password'
       ])
     },
     methods: {
-      ...mapMutations('login', [
+      ...mapMutations('user', [
         'updateEmail',
         'updatePassword',
         'updateToken'
@@ -38,6 +36,7 @@
           password: this.password
         };
         loginApi.login( user ).then(res => {
+          console.log(res);
           if ( res.code === 200 ) {
             user.username = res.userinfo.username;
             let expireDate = new Date();
@@ -63,7 +62,11 @@
 </script>
 
 <style lang="scss" scoped>
-.card {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+#login {
+  position: fixed;
+  width: 100%;
+  .card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
 }
 </style>

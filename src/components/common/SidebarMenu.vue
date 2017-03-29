@@ -2,7 +2,8 @@
   .sidebar
     .menu-button
       i.ml-auto.fa.fa-bars.fa-fw.fa-2x(aria-hidden="true")
-    b-list-group.mb-auto.w-100(flush)
+    #head-icon.mx-auto.my-4
+    b-list-group.w-100(flush)
       b-list-group-item(to="/dashboard") Home
         i.ml-auto.fa.fa-home.fa-fw.fa-2x(aria-hidden="true")
       b-list-group-item(to="/project") Project
@@ -18,13 +19,10 @@ nav.sidebar {
 }
 
 .sidebar {
-  position: relative;
+  position: fixed;
   padding: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-  float: left;
+  min-height: 100%;
   width: 200px;
-  height: 100%;
   background: #0275D8;
   & .list-group-item {
     color: #fff;
@@ -40,9 +38,16 @@ nav.sidebar {
 
   .menu-button {
     position: absolute;
-    left: 205px;
-    top: 10px;
+    left: 200px;
+    padding: 10px;
     display: none;
+  }
+
+  #head-icon {
+    background: #5CC9F5;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
   }
 }
 
@@ -56,7 +61,6 @@ nav.sidebar {
 @media (max-width: 991px) {
   .sidebar {
     z-index: 999;
-    position: fixed;
     margin-left: -145px;
     &:hover {
       margin-left: 0;
@@ -67,11 +71,11 @@ nav.sidebar {
 @media (max-width: 767px) {
   .sidebar {
     margin-left: -200px;
-    &:before {
+    &::before {
       content: '';
       opacity: 0;
       display: block;
-      width: 1px;
+      width: 8px;
       height: 100%;
       position: absolute;
       left: 200px;

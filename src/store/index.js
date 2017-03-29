@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // modules
-import login from '@/store/modules/login';
+import user from '@/store/modules/user';
 
 Vue.use(Vuex);
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    login
+    user
   },
   strict: debug
 });

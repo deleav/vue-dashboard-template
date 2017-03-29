@@ -4,7 +4,7 @@ export default {
   login( data ) {
     console.log( 'login' );
     return new Promise(( resolve, reject ) => {
-      return fetch(genUrl('/user/login'), {
+      fetch(genUrl('/user/login'), {
         method: 'POST',
         body: JSON.stringify({
           email: data.email,
@@ -14,7 +14,7 @@ export default {
           "Content-Type": "application/json"
         },
       }).then(
-        response => resolve( response.json() ),
+        response => response.text().then(text => resolve(text ? JSON.parse( text ) : '')),
         error => reject( error.message )
       );
     });
@@ -33,7 +33,7 @@ export default {
           "Content-Type": "application/json"
         }
       }).then(
-        response => resolve( response.json() ),
+        response => response.text().then(text => resolve(text ? JSON.parse( text ) : '')),
         error => reject( error.message )
       );
     });

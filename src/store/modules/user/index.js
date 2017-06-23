@@ -3,8 +3,8 @@ import * as types from './types';
 export default {
   namespaced: true,
   state: {
-    email: 'sunny4817@gmail.com',
-    password: '1234qwer',
+    email: '',
+    password: '',
     token: ''
   },
   mutations: {

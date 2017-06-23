@@ -1,33 +1,4 @@
 <template lang="jade">
   .h-100
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
-    div Project
+    div Project page
 </template>

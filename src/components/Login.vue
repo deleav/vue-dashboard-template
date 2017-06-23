@@ -27,8 +27,7 @@
     methods: {
       ...mapMutations('user', [
         'updateEmail',
-        'updatePassword',
-        'updateToken'
+        'updatePassword'
       ]),
       login() {
         let user = {
@@ -38,16 +37,10 @@
         loginApi.login( user ).then(res => {
           console.log(res);
           if ( res.code === 200 ) {
-            user.username = res.userinfo.username;
             let expireDate = new Date();
             expireDate.setDate(expireDate.getDate() + 2);
-            loginApi.uLogin( user ).then(res => {
-              console.log(res);
-              if ( res.token )
-                this.updateToken({ value: res.token });
-              this.$cookie.set('email', user.email, { expires: expireDate });
-              this.$router.push('/');
-            }, error => responseApi.errorResponse( error ));
+            this.$cookie.set('email', user.email, { expires: expireDate });
+            this.$router.push('/');
           } else {
             let error = {
               msg: res.msg,

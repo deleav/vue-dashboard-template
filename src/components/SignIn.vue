@@ -12,11 +12,9 @@
 
     <!-- Modal Component -->
     <b-modal id="modal1" title="Submit your name" @ok="submit" @shown="clearName">
-
       <form @submit.stop.prevent="submit">
-        <b-form-input type="text" placeholder="Enter your name" v-model="name"></b-form-input>
+        <b-form-input type="text" placeholder="Enter your name" v-model="name" required></b-form-input>
       </form>
-
     </b-modal>
 
   </div>
